@@ -1,0 +1,37 @@
+#define PWM_PIN 9
+#define SHUNT_RES 47.0
+#define VREF 5.0
+
+float L1, L2, VRx, V47, corrente;
+
+void setup() {
+  pinMode(PWM_PIN, OUTPUT);
+  pinMode(A0, INPUT);  
+  pinMode(A1, INPUT);  
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available()) {
+    int pwm_valor = Serial.parseInt();       
+    analogWrite(PWM_PIN, pwm_valor);         
+    delay(500);                             
+    float somaL1 = 0, somaL2 = 0;
+
+    for (int i = 0; i < 100; i++) {           
+      somaL1 += analogRead(A0);             
+      somaL2 += analogRead(A1);           
+      delay(10);
+    }
+
+    L1 = somaL1 / 100.0;
+    L2 = somaL2 / 100.0;
+
+    V47 = VREF * L2 / 1023.0;                       
+    VRx = VREF * (L1 - L2) / 1023.0;               
+    corrente = (V47 / SHUNT_RES) * 1000.0;        
+
+    Serial.println(VRx, 3);                         
+    Serial.println(corrente, 3);                    
+  }
+}
