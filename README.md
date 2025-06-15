@@ -9,3 +9,7 @@
 7 - Com o circuito montado e Arduino contectado ao computador, execute o arquivo .txt da interface;  
  7.1 - Abra o prompt do Anaconda ou Miniconda, vá até o diretório onde o arquivo .txt foi salvo e digite: python nomedoarquivo.py;  
 8 - Digite o número da porta que o Arduino está conectado, clique em conectar e inicie as medições.   
+9 - Vídeo disponível em:
+
+
+Contato: diogo.santos@ctec.ufal.br
